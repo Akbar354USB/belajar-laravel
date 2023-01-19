@@ -1,4 +1,4 @@
-<!doctype html>
+{{-- <!doctype html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -48,4 +48,39 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>
-</html>
+</html> --}}
+
+@extends('backend.master')
+
+@section('content')
+<div class="card card-body">
+  <a href="{{ route("student-create") }}"><button class="btn btn-primary mb-4">Tambah Data</button></a>
+  <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">NO</th>
+      <th scope="col">NAMA</th>
+      <th scope="col">ALAMAT</th>
+      <th scope="col">AKSI</th>
+    </tr>
+  </thead>
+  <tbody>
+      @foreach ($students as $key => $item)
+      <tr>
+      <th scope="row">{{ $key + 1 }}</th>
+      <td>{{ $item->nama }}</td>
+      <td>{{ $item->adress }}</td>
+      <td>
+          <a class="btn btn-primary" href="{{ route("student-edit", $item->id) }}" >Edit</a>
+          <form action="{{ route("student-delete", $item->id) }}" method="post" style="display: inline" class="form-check-inline">
+              @csrf
+              @method('DELETE')
+              <button class="btn btn-danger" type="submit">Hapus</button>
+          </form>
+      </td>
+      </tr>
+    @endforeach
+  </tbody>
+</table>
+</div>
+@endsection

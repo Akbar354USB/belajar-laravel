@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('backend.master');
 });
 
 Route::get('/student/create', [StudentController::class, 'create'])->name("student-create");

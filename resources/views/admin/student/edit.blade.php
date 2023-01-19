@@ -1,4 +1,4 @@
-<!doctype html>
+{{-- <!doctype html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -34,4 +34,25 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>
-</html>
+</html> --}}
+
+@extends('backend.master')
+
+@section('content')
+<div class="card card-body">
+  <form action="{{ route('student-update', $student->id) }}" method="post">
+    @csrf
+    @method("put")
+<div class="form-group">
+<label for="exampleInputEmail1">NAMA</label>
+<input name="nama" class="form-control" placeholder="Masukan Nama" value="{{ $student->nama }}">
+</div>
+<div class="form-group">
+<label for="exampleInputPassword1">ALAMAT</label>
+<input name="adress" class="form-control" placeholder="Masukan Alamat" value="{{ $student->adress }}">
+</div>
+<button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+    
+@endsection
