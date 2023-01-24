@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Models\student;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,8 +18,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('backend.master');
+    return view('auth.login');
 });
+
+Route::middleware('auth')->group(function(){
+
+
 
 Route::get('/student/create', [StudentController::class, 'create'])->name("student-create");
 Route::post('/student/school', [StudentController::class, 'store'])->name("student-school-store");
@@ -25,3 +31,8 @@ Route::get('/student/index', [StudentController::class, 'index'])->name("student
 Route::delete('/student/delete/{id}', [StudentController::class, 'destroy'])->name("student-delete");
 Route::get('/student/edit/{id}', [StudentController::class, 'edit'])->name("student-edit");
 Route::put('/student/update/{id}', [StudentController::class, 'update'])->name("student-update");
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+});
+
+Auth::routes();
