@@ -54,7 +54,9 @@
 
 @section('content')
 <div class="card card-body">
-  <a href="{{ route("student-create") }}"><button class="btn btn-primary mb-4">Tambah Data</button></a>
+@if (Auth::user()->role == "admin")
+<a href="{{ route("student-create") }}"><button class="btn btn-primary mb-4">Tambah Data</button></a>
+@endif
   <table class="table table-striped">
   <thead>
     <tr>
@@ -70,6 +72,7 @@
       <th scope="row">{{ $key + 1 }}</th>
       <td>{{ $item->nama }}</td>
       <td>{{ $item->adress }}</td>
+      @if (Auth::user()->role == "admin")
       <td>
           <a class="btn btn-primary" href="{{ route("student-edit", $item->id) }}" >Edit</a>
           <form action="{{ route("student-delete", $item->id) }}" method="post" style="display: inline" class="form-check-inline">
@@ -78,6 +81,7 @@
               <button class="btn btn-danger" type="submit">Hapus</button>
           </form>
       </td>
+      @endif
       </tr>
     @endforeach
   </tbody>
