@@ -12,7 +12,7 @@
     <title>tes</title>
 
     <!-- Custom fonts for this template-->
-    @include('backend.partial.link');
+    @include('backend.partial.link')
 
 </head>
 
@@ -22,7 +22,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        @include('backend.partial.sidebar');
+        @include('backend.partial.sidebar')
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -65,7 +65,7 @@
     
 
     <!-- Bootstrap core JavaScript-->
-    @include('backend.partial.js');
+    @include('backend.partial.js')
 
 </body>
 

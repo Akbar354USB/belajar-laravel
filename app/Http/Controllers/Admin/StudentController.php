@@ -13,7 +13,7 @@ class StudentController extends Controller
     }
 
     public function index(){
-        $students = student::all();
+        $students = student::paginate(3);
 
         //return response()->json($students);
         return view('admin.student.index',compact("students"));
@@ -32,14 +32,14 @@ class StudentController extends Controller
 
         student::create($request->all());
 
-        return redirect()->route("student-index");
+        return redirect()->route("student-index")->with('status', 'Sukses Tambah Data Siswa');;
     }
 
     public function destroy($id){
         $student = student::where("id", $id)->first();
         $student->delete();
         
-        return redirect()->route("student-index");
+        return redirect()->route("student-index")->with('status', 'Sukses Hapus Data Siswa');
     }
 
     public function edit($id){
@@ -51,7 +51,7 @@ class StudentController extends Controller
         $student = student::where("id", $id)->first();
         $student->update($request->all());
 
-        return redirect()->route("student-index");
+        return redirect()->route("student-index")->with('status', 'Sukses Update Data Siswa');;
         
 
     }

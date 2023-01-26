@@ -87,4 +87,21 @@
   </tbody>
 </table>
 </div>
+
+{{-- tag menambahkan pagination --}}
+<div class="mt-2 float-right">
+  {{ $students->links() }}
+</div>
+
+{{-- untuk alert keterangan --}}
+
+@if (session('status'))
+<script>
+  Swal.fire({
+    icon : 'success',
+    title : 'Sukses!',
+    text : "{{ session('status') }}",
+  });
+</script>
+@endif
 @endsection
