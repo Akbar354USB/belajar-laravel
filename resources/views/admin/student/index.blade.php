@@ -54,16 +54,43 @@
 
 @section('content')
 <div class="card card-body">
+
+  <div class="form-group row mb-1 mt-3">
+
 @if (Auth::user()->role == "admin")
-<a href="{{ route("student-create") }}"><button class="btn btn-primary mb-4">Tambah Data</button></a>
+<div class="col-sm-6 mb-3 mb-sm-0">
+  <a href="{{ route("student-create") }}"><button class="btn btn-primary mb-4">Tambah Data</button></a>
+</div>
 @endif
-  <table class="table table-striped">
+
+<div class="ml-auto mr-5">
+  <form class="d-none d-sm-inline-block form-inline navbar-search">
+    <div class="input-group">
+        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+            aria-label="Search"  value="{{ Request::get('nama') }}" name="nama">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">
+                <i class="fas fa-search fa-sm"></i>
+            </button>
+        </div>
+    </div>
+    </form>
+</div>
+
+
+
+</div>
+
+
+  <table class="table table-striped mt-1">
   <thead>
     <tr>
       <th scope="col">NO</th>
       <th scope="col">NAMA</th>
       <th scope="col">ALAMAT</th>
+      @if (Auth::user()->role == "admin")
       <th scope="col">AKSI</th>
+      @endif
     </tr>
   </thead>
   <tbody>

@@ -12,8 +12,15 @@ class StudentController extends Controller
         return view('admin.student.create');
     }
 
-    public function index(){
-        $students = student::paginate(3);
+    public function index(Request $request){
+        $students = student::paginate(5);
+
+        $filterKeyword = $request->get('nama');
+        if($filterKeyword){
+        $students = student::where("nama", "LIKE",
+        "%$filterKeyword%")->paginate(5);
+        }
+
 
         //return response()->json($students);
         return view('admin.student.index',compact("students"));
@@ -32,7 +39,7 @@ class StudentController extends Controller
 
         student::create($request->all());
 
-        return redirect()->route("student-index")->with('status', 'Sukses Tambah Data Siswa');;
+        return redirect()->route("student-index")->with('status', 'Sukses Tambah Data Siswa');
     }
 
     public function destroy($id){
