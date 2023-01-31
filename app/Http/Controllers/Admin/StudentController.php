@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Major;
 use App\Models\student;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
     public function create(){
-        return view('admin.student.create');
+        $major = Major::all();
+        return view('admin.student.create', compact("major"));
     }
 
     public function index(Request $request){
@@ -32,8 +34,10 @@ class StudentController extends Controller
         $this->validate($request, [
             'nama' => 'required',
             'adress' => 'required',
+            'major_id' => 'required',
         ],[
             'nama.required' => 'nama belum di masukkan',
+            'major_id.required' => 'jurusan belum di masukkan',
             'adress.required' => 'alamat belum di masukkan'
         ]);
 
@@ -51,7 +55,8 @@ class StudentController extends Controller
 
     public function edit($id){
         $student = student::where("id", $id)->first();
-        return view("admin.student.edit", compact("student"));
+        $major = Major::all();
+        return view("admin.student.edit", compact("student","major"));
     }
 
     public function update(Request $request, $id){

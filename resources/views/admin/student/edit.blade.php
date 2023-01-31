@@ -47,6 +47,21 @@
 <label for="exampleInputEmail1">NAMA</label>
 <input name="nama" class="form-control" placeholder="Masukan Nama" value="{{ $student->nama }}">
 </div>
+
+<div class="form-group">
+  <select class="form-control" name="major_id" id="">
+    <option label="Pilih Jurusan"></option>
+    @foreach ($major as $item)
+    <option @if ($student->major_id == $item->id ) selected @endif value="{{ $item->id }}">{{ $item->major }}</option>
+    @endforeach
+  </select>
+  @error('major_id')
+  <span class="text-danger">
+    <strong>{{ $message }}</strong>
+  </span>
+  @enderror
+  </div>
+
 <div class="form-group">
 <label for="exampleInputPassword1">ALAMAT</label>
 <input name="adress" class="form-control" placeholder="Masukan Alamat" value="{{ $student->adress }}">
