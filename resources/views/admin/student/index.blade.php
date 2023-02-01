@@ -87,6 +87,7 @@
     <tr>
       <th scope="col">NO</th>
       <th scope="col">NAMA</th>
+      <th scope="col">JURUSAN</th>
       <th scope="col">ALAMAT</th>
       @if (Auth::user()->role == "admin")
       <th scope="col">AKSI</th>
@@ -98,6 +99,7 @@
       <tr>
       <th scope="row">{{ $key + 1 }}</th>
       <td>{{ $item->nama }}</td>
+      <td>{{ $item->major->major }}</td>
       <td>{{ $item->adress }}</td>
       @if (Auth::user()->role == "admin")
       <td>
@@ -107,6 +109,10 @@
               @method('DELETE')
               <button class="btn btn-danger" type="submit">Hapus</button>
           </form>
+          <form action="{{ route("student-show", $item->id) }}" method="get" style="display: inline" class="form-check-inline">
+            @csrf
+            <button class="btn btn-success" type="submit">Detail</button>
+        </form>
       </td>
       @endif
       </tr>

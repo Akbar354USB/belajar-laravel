@@ -15,7 +15,7 @@ class StudentController extends Controller
     }
 
     public function index(Request $request){
-        $students = student::paginate(5);
+        $students = student::with("major")->paginate(5);
 
         $filterKeyword = $request->get('nama');
         if($filterKeyword){
@@ -67,5 +67,12 @@ class StudentController extends Controller
         
 
     }
+
+    public function show($id){
+        $student = student::with('major')->where("id", $id)->first();
+
+        return view('admin.student.show', compact("student"));
+    }
+
     
 }

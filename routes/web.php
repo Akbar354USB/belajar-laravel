@@ -38,6 +38,7 @@ Route::put('/student/update/{id}', [StudentController::class, 'update'])->name("
 Route::middleware('auth', 'ChekRole:admin,user')->group(function(){
 
 Route::get('/student/index', [StudentController::class, 'index'])->name("student-index");
+Route::get('/student/show/{id}', [StudentController::class, 'show'])->name("student-show");
     
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 });
